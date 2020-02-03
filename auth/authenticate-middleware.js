@@ -13,8 +13,8 @@ module.exports = (req, res, next) => {
             //token is not valid
             res.status(401).json({error: "unable to get token"})
           } else {
-              console.log(decodedToken);
-            req.department = decodedToken.department;
+              console.log("Decoded token", decodedToken);
+            req.user_id = decodedToken.userId;
             next();
           }
       })

@@ -5,7 +5,7 @@ const helmet = require('helmet');
 //Include routers/middlewares
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
-
+const sleepLogRouter = require('../sleepLog/sleepLog-router.js');
 const server = express();
 
 server.use(helmet());
@@ -19,6 +19,7 @@ server.get("/", (req, res) => {
   //Server.use
 
   server.use('/api/auth', authRouter);
-  server.use('/api/users', usersRouter);
+  server.use('/api/users', usersRouter, sleepLogRouter);
+//   server.use('/api/users/:id', usersRouter, sleepLogRouter);
 
   module.exports = server;
