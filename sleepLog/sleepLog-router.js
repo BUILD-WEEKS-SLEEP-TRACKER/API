@@ -3,12 +3,14 @@ const express = require('express');
 const sleepLog = require('./sleepLog-model.js');
 const Users = require('../users/users-model.js');
 
+const restricted = require('../auth/authenticate-middleware.js');
+
 const router = express.Router();
 
 //CREATE A NEW SLEEP ENTRY LOG
 
 
-router.post('/:id/create', validateUserId, (req,res)=>{ //THIS ID IS USER ID 
+router.post('/:id/create', restricted, validateUserId, (req,res)=>{ //THIS ID IS USER ID 
     const body = req.body;
     
     console.log("body", body);
@@ -33,7 +35,7 @@ router.post('/:id/create', validateUserId, (req,res)=>{ //THIS ID IS USER ID
 
 //GET ALL LOGS FOR A SPECIFIC USER
 
-router.get('/:id/logs', validateUserId, (req,res) => { // this ID is USER ID
+router.get('/:id/logs', restricted, validateUserId, (req,res) => { // this ID is USER ID
     const id = req.params.id
 
     sleepLog.get(id)
@@ -50,7 +52,7 @@ router.get('/:id/logs', validateUserId, (req,res) => { // this ID is USER ID
 
 //UPDATE A SPECIFIC LOG FOR A USER
 
-router.put('/logs/:id', validateLogId, (req,res)=>{ // this ID is log ID 
+router.put('/logs/:id', restricted, validateLogId, (req,res)=>{ // this ID is log ID 
 
     const {id} = req.params;
     const changes = req.body;
@@ -71,7 +73,7 @@ router.put('/logs/:id', validateLogId, (req,res)=>{ // this ID is log ID
 
 //DELETE A LOG FOR A USER 
 
-router.delete('/logs/:id', validateLogId, (req,res)=> { // this ID is log ID
+router.delete('/logs/:id', restricted, validateLogId, (req,res)=> { // this ID is log ID
 
     const {id} = req.params;
 
