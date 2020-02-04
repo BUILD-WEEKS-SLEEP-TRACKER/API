@@ -10,7 +10,7 @@ module.exports = {
 
 function get(id){
     return db('sleepLog')
-    .select( 'sleepLog.id', 'u.firstName', 'sleepLog.date', 'sleepLog.wakeUpRating', 'sleepLog.dayRating', 'sleepLog.nightRating')
+    .select( 'sleepLog.id', 'u.firstName', 'sleepLog.date', 'sleepLog.wakeUpRating', 'sleepLog.dayRating', 'sleepLog.nightRating', 'sleepLog.wokeUp', 'sleepLog.fellAsleep')
     .join('users as u', 'u.id', 'sleepLog.user_id')
     .where({user_id: id})
 }

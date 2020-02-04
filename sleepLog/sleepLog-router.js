@@ -28,7 +28,7 @@ router.post('/:id/create', restricted, validateUserId, (req,res)=>{ //THIS ID IS
     })
 }   else {
     res.status(400).json({
-        error: "Please enter the date and the ratings for this log entry"
+        error: "Missing some data to create a new log entry"
     })
 }
 })

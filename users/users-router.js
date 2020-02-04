@@ -4,7 +4,7 @@ const Users = require('./users-model.js');
 
 const Auth = require('../auth/authenticate-middleware.js');
 
-router.get('/', (req, res) => {
+router.get('/', Auth, (req, res) => {
     Users.find()
       .then(users => {
         res.json(users);
