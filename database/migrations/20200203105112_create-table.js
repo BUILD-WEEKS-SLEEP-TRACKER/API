@@ -29,9 +29,9 @@ exports.up = function(knex) {
         .notNullable();
         tbl.integer('nightRating')
         .notNullable();
-        tbl.time('wokeUp')
-        .notNullable();
-        tbl.time('fellAsleep')
+        tbl.time('wokeUp');
+        tbl.time('fellAsleep');
+        tbl.time('totalTimeSlept')
         .notNullable();
         tbl.integer('user_id')
         .unsigned()
