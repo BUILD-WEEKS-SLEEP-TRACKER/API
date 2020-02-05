@@ -19,9 +19,13 @@ exports.up = function(knex) {
 
     })
 
+    //create dailyMood rating and timeCreated variable
+
     .createTable('sleepLog', tbl => {
         tbl.increments();
         tbl.date('date',20) // 01/01/2020
+        .notNullable();
+        tbl.date('timeCreated')
         .notNullable();
         tbl.integer('wakeUpRating')
         .notNullable();

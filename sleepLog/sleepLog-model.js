@@ -2,6 +2,7 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
     get,
+    getAll,
     getById,
     add,
     update,
@@ -10,9 +11,15 @@ module.exports = {
 
 function get(id){
     return db('sleepLog')
-    .select( 'sleepLog.id', 'u.firstName', 'sleepLog.date', 'sleepLog.wakeUpRating', 'sleepLog.dayRating', 'sleepLog.nightRating', 'sleepLog.wokeUp', 'sleepLog.fellAsleep', 'sleepLog.totalTimeSlept')
+    .select( 'sleepLog.id', 'u.firstName', 'sleepLog.date', 'sleepLog.timeCreated', 'sleepLog.wakeUpRating', 'sleepLog.dayRating', 'sleepLog.nightRating', 'sleepLog.wokeUp', 'sleepLog.fellAsleep', 'sleepLog.totalTimeSlept')
     .join('users as u', 'u.id', 'sleepLog.user_id')
     .where({user_id: id})
+}
+
+function getAll(){
+    return db('sleepLog')
+    .select( 'sleepLog.id', 'u.firstName', 'sleepLog.date', 'sleepLog.timeCreated', 'sleepLog.wakeUpRating', 'sleepLog.dayRating', 'sleepLog.nightRating', 'sleepLog.wokeUp', 'sleepLog.fellAsleep', 'sleepLog.totalTimeSlept')
+    .join('users as u', 'u.id', 'sleepLog.user_id');
 }
 
 function getById(logId){

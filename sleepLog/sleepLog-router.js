@@ -33,6 +33,21 @@ router.post('/:id/create', restricted, validateUserId, (req,res)=>{ //THIS ID IS
 }
 })
 
+router.get('/logs', (req,res) => {
+
+    sleepLog.getAll()
+    .then(logs => {
+        res.json(logs);
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error:"Unable to get all sleep logs"
+        })
+    })
+  
+})
+
 //GET ALL LOGS FOR A SPECIFIC USER
 
 router.get('/:id/logs', restricted, validateUserId, (req,res) => { // this ID is USER ID
