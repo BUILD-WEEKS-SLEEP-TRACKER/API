@@ -35,7 +35,7 @@ exports.up = function(knex) {
         .notNullable();
         tbl.time('wokeUp');
         tbl.time('fellAsleep');
-        tbl.time('totalTimeSlept')
+        tbl.integer('totalTimeSlept')
         .notNullable();
         tbl.integer('user_id')
         .unsigned()
