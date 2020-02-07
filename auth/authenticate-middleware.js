@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     
           if(err){
             //token is not valid
-            res.status(401).json({error: "unable to get token"})
+            res.status(401).json({error: "error verifying token"})
           } else {
               console.log("Decoded token", decodedToken);
             req.user_id = decodedToken.userId;

@@ -8,7 +8,7 @@ const Users = require('../users/users-model.js');
 
 router.post('/register', (req, res) => {
     let user = req.body;
-    const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
+    const hash = bcrypt.hashSync(user.password, 8); // 2 ^ n
     user.password = hash;
   
     Users.add(user)

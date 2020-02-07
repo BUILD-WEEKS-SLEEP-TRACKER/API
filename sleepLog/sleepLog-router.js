@@ -31,26 +31,46 @@ router.post('/:id/create', restricted, validateUserId, (req,res)=>{ //THIS ID IS
         error: "Missing some data to create a new log entry"
     })
 }
-})
+});
 
-router.get('/logs', (req,res) => {
+router.get('/logs', restricted, (req,res) => {
+
+    console.log("is it showing up?")
 
     sleepLog.getAll()
     .then(logs => {
+        console.log("is it working?");
         res.json(logs);
     })
     .catch(err => {
         console.log(err)
         res.status(500).json({
-            error:"Unable to get all sleep logs"
+        error:"Unable to get all sleep logs"
         })
     })
   
 })
 
+router.get('/journal', (req,res)=>{
+
+    sleepLog.getAll()
+    .then(logs => {
+        res.json(logs);
+    })
+    .catch( err => {
+        console.log(err);
+        res.status(500).json({
+            error: "Unable to get all entries"
+        })
+    })
+})
+
+
+
 //GET ALL LOGS FOR A SPECIFIC USER
 
 router.get('/:id/logs', restricted, validateUserId, (req,res) => { // this ID is USER ID
+    console.log('does it show up');
     const id = req.params.id
 
     sleepLog.get(id)
@@ -63,7 +83,7 @@ router.get('/:id/logs', restricted, validateUserId, (req,res) => { // this ID is
             error:"Unable to get this users sleep logs"
         })
     })
-})
+});
 
 //UPDATE A SPECIFIC LOG FOR A USER
 
@@ -120,7 +140,7 @@ function validateUserId(req,res,next){
     })
 }
 
-router.use(validateUserId);
+// router.use(validateUserId);
 
 function validateLogId(req,res,next){
     const id = req.params.id;
@@ -136,6 +156,8 @@ function validateLogId(req,res,next){
     })
 }
 
-router.use(validateUserId);
+// router.use(validateUserId);
+
+
 
 module.exports = router;

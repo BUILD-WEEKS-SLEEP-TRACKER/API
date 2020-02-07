@@ -8,7 +8,6 @@ router.get('/:id', (req, res) => {
 
   const id = req.params.id;
 
-   
     if(id){
 
       Users.findById(id)
@@ -24,17 +23,19 @@ router.get('/:id', (req, res) => {
     }
   });
 
-  router.get('/', Auth, (req,res)=> {
+  router.get('/',  (req,res)=> {
 
     Users.find()
-    .then( users => {
-      res.json(users);
+    .then( users  => {
+      res.json(users );
     })
-    .catch(
-      res.status(500).json({
-        error: "Unable to get users"
+    .catch( error => {
+
+      res.status(400).json({
+      error: "Unable to get users"
+      
       })
-    )
+    })
   })
 
  
